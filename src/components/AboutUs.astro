@@ -4,8 +4,7 @@ import { site } from '../data/site';
 const years = new Date().getFullYear() - site.foundingYear;
 
 const facts = [
-  { label: 'Matriculación', value: 'C.P.C.E. Río Negro' },
-  { label: 'Cobertura', value: 'Bariloche y la región andina' },
+  { label: 'Cobertura', value: 'Río Negro y alcance federal' },
   { label: 'Modalidad', value: 'Atención online y presencial' },
   { label: 'Especialidad', value: 'Contable, laboral y jurídico' },
 ];
@@ -38,6 +37,23 @@ const facts = [
                 ))
               }
             </dl>
+
+            <div class="mt-6 border-t border-grafito-200/70 pt-6">
+              <p class="text-xs font-semibold uppercase tracking-eyebrow text-grafito-400">Matrículas</p>
+              <ul class="mt-4 space-y-4">
+                {
+                  site.owner.matriculas.map((m) => (
+                    <li>
+                      <p class="font-serif text-base leading-tight text-grafito-950">
+                        {m.profesion}
+                        <span class="font-sans text-sm font-normal text-grafito-500"> · {m.organismo} {m.detalle}</span>
+                      </p>
+                      <p class="mt-0.5 text-xs text-grafito-500">{m.alcance}</p>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -57,8 +73,8 @@ const facts = [
           <p>
             El <strong class="font-semibold text-grafito-800">{site.name}</strong> trabaja desde San
             Carlos de Bariloche con una idea simple: que llevar las cuentas en orden deje de ser un
-            dolor de cabeza. Acompañamos a comerciantes, profesionales, pymes y familias de toda la
-            región andina de Río Negro.
+            dolor de cabeza. Acompañamos a comerciantes, profesionales, pymes y familias de Bariloche,
+            la región andina y toda la provincia de Río Negro.
           </p>
           <p>
             Combinamos rigor técnico con un trato claro: preferimos que entiendas por qué firmás,

@@ -25,8 +25,33 @@ export const site = {
   // ── Titular ──────────────────────────────────────────────────────────────
   owner: {
     name: 'María Emilia González Magni', // EDITAR (nombre de la titular)
-    role: 'Contadora Pública · Titular del estudio',
-    matricula: 'Matrícula C.P.C.E. Río Negro', // EDITAR (Nº de matrícula)
+    role: 'Contadora Pública y Abogada · Titular del estudio',
+    // Matrícula resumida para espacios compactos (Hero, Footer).
+    matricula: 'Mat. C.P.C.E. Río Negro T° VII F° 127',
+    // Matrículas profesionales completas, cada una con su alcance territorial:
+    //  · la contable (C.P.C.E.) rige en toda la provincia de Río Negro;
+    //  · la de abogada (C.A.S.C.B.) en la zona andina;
+    //  · la federal (C.S.J.N.) habilita causas federales en todo el país.
+    matriculas: [
+      {
+        profesion: 'Contadora Pública',
+        organismo: 'C.P.C.E. Río Negro',
+        detalle: 'T° VII · F° 127',
+        alcance: 'Toda la provincia de Río Negro',
+      },
+      {
+        profesion: 'Abogada',
+        organismo: 'C.A.S.C.B.',
+        detalle: 'T° XI · F° 5551',
+        alcance: 'Colegio de Abogados de Bariloche · región andina',
+      },
+      {
+        profesion: 'Matrícula federal',
+        organismo: 'C.S.J.N.',
+        detalle: 'T° 127 · F° 858',
+        alcance: 'Causas federales en todo el país',
+      },
+    ],
   },
 
   // ── Contacto ─────────────────────────────────────────────────────────────
@@ -150,7 +175,7 @@ export const services = [
 export const faqs = [
   {
     q: '¿Atienden sólo en Bariloche o también a clientes de otras ciudades?',
-    a: 'Estamos en San Carlos de Bariloche y atendemos a clientes de toda la región andina de Río Negro —Dina Huapi, El Bolsón, Villa La Angostura— y del resto del país de forma remota. La distancia no es un problema: gran parte del trabajo se resuelve online.',
+    a: 'Estamos en San Carlos de Bariloche. En lo contable e impositivo trabajamos en toda la provincia de Río Negro y, de forma remota, con clientes de todo el país. En lo jurídico cubrimos la región andina —Dina Huapi, El Bolsón, Villa La Angostura— y, por matrícula federal, causas de la Justicia Nacional en cualquier punto del país. La distancia no es un problema: gran parte del trabajo se resuelve online.',
   },
   {
     q: '¿Trabajan con monotributistas que recién empiezan?',

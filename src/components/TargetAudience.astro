@@ -1,0 +1,131 @@
+---
+import SectionHeader from './SectionHeader.astro';
+import { waLink } from '../data/site';
+
+const segments = [
+  {
+    key: 'empresas',
+    kicker: 'Empresas y pymes',
+    lead: 'Cuando el negocio necesita orden, previsibilidad y alguien que mire los números junto a vos.',
+    items: [
+      'Constitución y alta de sociedades',
+      'Liquidación de sueldos y cargas sociales',
+      'IVA, Ingresos Brutos y Convenio Multilateral',
+      'Cierre de ejercicio y estados contables',
+      'Acompañamiento en decisiones del negocio',
+    ],
+    wa: waLink('Hola, tengo una empresa o pyme y quería asesoramiento contable.'),
+    tone: 'dark' as const,
+  },
+  {
+    key: 'personas',
+    kicker: 'Personas',
+    lead: 'Para resolver tu situación particular sin tecnicismos: qué pagás, cuándo y por qué.',
+    items: [
+      'Alta, categoría y recategorización de monotributo',
+      'Impuesto a las Ganancias',
+      'Bienes Personales',
+      'Trabajadores autónomos',
+      'Facturación, deducciones y trámites en ARCA',
+    ],
+    wa: waLink('Hola, soy monotributista o particular y tenía una consulta.'),
+    tone: 'light' as const,
+  },
+];
+---
+
+<section id="para-quien" class="scroll-mt-24 py-section">
+  <div class="container-editorial">
+    <SectionHeader
+      data-reveal
+      index="01"
+      eyebrow="Para quién trabajamos"
+      title="Dos realidades distintas, la misma atención cercana"
+      intro="Antes de hablar de servicios, lo importante es saber si somos lo que estás buscando. Mirá con cuál de estos dos mundos te identificás."
+    />
+
+    <div class="mt-14 grid gap-6 md:grid-cols-2 lg:gap-8" data-reveal-stagger>
+      {
+        segments.map((seg, i) => {
+          const dark = seg.tone === 'dark';
+          return (
+            <article
+              data-reveal
+              class:list={[
+                'group relative flex flex-col overflow-hidden rounded-[2rem] p-8 transition-all duration-500 ease-out-expo hover:-translate-y-1.5 sm:p-10',
+                i === 1 && 'lg:mt-16',
+                dark
+                  ? 'bg-grafito-950 text-arena-200 ring-1 ring-grafito-900 hover:shadow-lift'
+                  : 'border border-grafito-200/70 bg-arena-100/50 text-grafito-700 hover:border-terracota-300 hover:bg-arena-100 hover:shadow-soft',
+              ]}
+            >
+              {/* Resplandor de acento al hover */}
+              <div
+                aria-hidden="true"
+                class:list={[
+                  'pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full opacity-0 blur-3xl transition-opacity duration-700 group-hover:opacity-100',
+                  dark ? 'bg-terracota-600/30' : 'bg-terracota-300/40',
+                ]}
+              />
+
+              <div class="relative">
+                <span
+                  class:list={[
+                    'inline-flex items-center gap-2.5 text-xs font-semibold uppercase tracking-eyebrow',
+                    dark ? 'text-terracota-300' : 'text-terracota-700',
+                  ]}
+                >
+                  <span class="text-2xl font-light not-italic leading-none opacity-50">0{i + 1}</span>
+                  {seg.kicker}
+                </span>
+
+                <h3
+                  class:list={[
+                    'mt-5 font-serif text-fluid-2xl font-medium',
+                    dark ? 'text-arena-50' : 'text-grafito-950',
+                  ]}
+                >
+                  {seg.kicker}
+                </h3>
+
+                <p class:list={['mt-4 max-w-md text-fluid-base leading-relaxed', dark ? 'text-arena-300' : 'text-grafito-600']}>
+                  {seg.lead}
+                </p>
+
+                <ul class="mt-8 space-y-3.5">
+                  {seg.items.map((item) => (
+                    <li class="flex items-center gap-4">
+                      <span
+                        class:list={[
+                          'h-px w-6 shrink-0 origin-left transition-all duration-500 ease-out-expo group-hover:w-9',
+                          dark ? 'bg-terracota-400' : 'bg-terracota-500',
+                        ]}
+                      />
+                      <span class:list={['text-fluid-base', dark ? 'text-arena-100' : 'text-grafito-800']}>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div class="relative mt-9 pt-7">
+                <div class:list={['border-t', dark ? 'border-arena-50/10' : 'border-grafito-200/70']} />
+                <a
+                  href={seg.wa}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class:list={[
+                    'mt-6 inline-flex items-center gap-2 font-medium transition-colors',
+                    dark ? 'text-arena-50 hover:text-terracota-300' : 'text-grafito-950 hover:text-terracota-700',
+                  ]}
+                >
+                  {seg.key === 'empresas' ? 'Hablemos de tu empresa' : 'Contanos tu caso'}
+                  <span class="transition-transform duration-300 ease-out-expo group-hover:translate-x-1.5" aria-hidden="true">→</span>
+                </a>
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>

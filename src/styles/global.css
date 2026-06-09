@@ -1,0 +1,242 @@
+/* ==========================================================================
+   ESTILOS GLOBALES — Estudio Gonzáles Magni
+   Base, tipografía editorial, clases reutilizables y micro-interacciones
+   en CSS puro (cero JavaScript).
+   ========================================================================== */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Permite animar height:auto en el acordeón (navegadores modernos) */
+    interpolate-size: allow-keywords;
+    --header-h: 4.75rem;
+    color-scheme: light;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Compensa el header sticky al saltar a un ancla */
+    scroll-padding-top: calc(var(--header-h) + 1rem);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-arena-50 font-sans text-fluid-base text-grafito-700 antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'kern', 'liga', 'calt';
+    overflow-x: hidden;
+  }
+
+  /* Títulos: serif editorial con optical sizing */
+  h1, h2, h3 {
+    @apply font-serif text-grafito-950;
+    font-optical-sizing: auto;
+    text-wrap: balance;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Selección de texto en tono terracota */
+  ::selection {
+    background-color: theme('colors.terracota.500');
+    color: theme('colors.arena.50');
+  }
+
+  /* Foco accesible y elegante */
+  :focus-visible {
+    outline: 2px solid theme('colors.terracota.600');
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Scrollbar discreta (WebKit) */
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+  ::-webkit-scrollbar-track {
+    background: theme('colors.arena.100');
+  }
+  ::-webkit-scrollbar-thumb {
+    background: theme('colors.arena.400');
+    border: 3px solid theme('colors.arena.100');
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: theme('colors.grafito.400');
+  }
+
+  img {
+    @apply h-auto max-w-full;
+  }
+
+  /* Respeto absoluto por quien prefiere menos movimiento */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* ── Contenedor editorial ─────────────────────────────────────────────── */
+  .container-editorial {
+    @apply mx-auto w-full max-w-content px-6 sm:px-8 lg:px-12;
+  }
+
+  /* ── Eyebrow: etiqueta superior con línea ─────────────────────────────── */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-eyebrow text-terracota-700;
+  }
+  .eyebrow::before {
+    content: '';
+    @apply inline-block h-px w-8 bg-terracota-500;
+  }
+  .eyebrow--light {
+    @apply text-terracota-300;
+  }
+  .eyebrow--light::before {
+    @apply bg-terracota-400;
+  }
+
+  /* ── Número de sección (estilo índice editorial) ──────────────────────── */
+  .section-index {
+    @apply font-serif text-sm font-medium tabular-nums text-grafito-300;
+  }
+
+  /* ── Botones con micro-interacciones ──────────────────────────────────── */
+  .btn {
+    @apply relative inline-flex select-none items-center justify-center gap-2.5
+           rounded-full px-7 py-3.5 text-center text-fluid-sm font-semibold
+           leading-none transition-all duration-300 ease-out-expo;
+  }
+  .btn:active {
+    transform: translateY(0) scale(0.985);
+  }
+
+  .btn-primary {
+    @apply bg-terracota-600 text-arena-50 shadow-soft
+           hover:-translate-y-0.5 hover:bg-terracota-700 hover:shadow-glow;
+  }
+
+  .btn-ghost {
+    @apply border border-grafito-300 bg-transparent text-grafito-800
+           hover:-translate-y-0.5 hover:border-grafito-900 hover:bg-grafito-900 hover:text-arena-50;
+  }
+
+  .btn-on-dark {
+    @apply border border-arena-50/30 bg-transparent text-arena-50
+           hover:-translate-y-0.5 hover:border-arena-50 hover:bg-arena-50 hover:text-grafito-950;
+  }
+
+  .btn-whatsapp {
+    @apply bg-pino-600 text-arena-50 shadow-soft
+           hover:-translate-y-0.5 hover:bg-pino-700 hover:shadow-lift;
+  }
+
+  /* Flecha que se desplaza al pasar el cursor */
+  .btn .btn-arrow {
+    @apply transition-transform duration-300 ease-out-expo;
+  }
+  .btn:hover .btn-arrow {
+    transform: translateX(4px);
+  }
+
+  /* ── Enlace con subrayado que se revela ───────────────────────────────── */
+  .link-underline {
+    @apply relative inline-block;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  /* ── Línea fina de separación cálida ──────────────────────────────────── */
+  .hairline {
+    @apply border-grafito-200/70;
+  }
+
+  /* ── Tarjeta de superficie clara ──────────────────────────────────────── */
+  .card {
+    @apply rounded-3xl border border-grafito-200/60 bg-arena-100/40 transition-all duration-500 ease-out-expo;
+  }
+
+  /* ── Acordeón FAQ (nativo <details>, animado sin JS) ───────────────────── */
+  .faq-item summary {
+    @apply cursor-pointer list-none;
+  }
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-item .faq-sign {
+    @apply transition-transform duration-500 ease-out-expo;
+  }
+  .faq-item[open] .faq-sign {
+    transform: rotate(135deg);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .faq-item::details-content {
+      height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: height 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.4s ease, content-visibility 0.45s allow-discrete;
+    }
+    .faq-item[open]::details-content {
+      height: auto;
+      opacity: 1;
+    }
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* ── Revelado al entrar en viewport (IntersectionObserver · multi-navegador) ──
+     El contenido sólo se oculta cuando JS añade .reveal-ready a <html> y se
+     permite movimiento. Sin JS o con prefers-reduced-motion, todo se ve normal. */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal-ready [data-reveal] {
+      opacity: 0;
+      transform: translateY(26px);
+      transition:
+        opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+      transition-delay: var(--reveal-delay, 0s);
+    }
+    .reveal-ready [data-reveal].is-visible {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}

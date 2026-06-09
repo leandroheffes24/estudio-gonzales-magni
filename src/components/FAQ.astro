@@ -1,0 +1,83 @@
+---
+import { faqs, waLink } from '../data/site';
+
+// Schema FAQ inyectado dinámicamente desde la misma fuente de datos
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: f.a,
+    },
+  })),
+};
+---
+
+<section id="preguntas" class="scroll-mt-24 py-section">
+  <div class="container-editorial">
+    <div class="grid gap-12 lg:grid-cols-12 lg:gap-16">
+      <!-- Intro + nudge de contacto -->
+      <div class="lg:col-span-5" data-reveal>
+        <div class="flex items-center gap-4">
+          <span class="section-index">06</span>
+          <span class="eyebrow">Preguntas frecuentes</span>
+        </div>
+        <h2 class="mt-5 font-serif text-fluid-3xl font-medium text-grafito-950">
+          Lo que más nos preguntan
+        </h2>
+        <p class="mt-6 max-w-md text-fluid-base leading-relaxed text-grafito-600">
+          Reunimos las dudas más comunes antes de la primera charla. Si la tuya no está acá, te
+          respondemos enseguida.
+        </p>
+
+        <div class="mt-8 rounded-3xl border border-grafito-200/70 bg-arena-100/60 p-6">
+          <p class="font-serif text-lg text-grafito-950">¿Tenés otra pregunta?</p>
+          <p class="mt-2 text-sm leading-relaxed text-grafito-600">
+            Escribinos sin vueltas. Te respondemos en el día, en lenguaje claro.
+          </p>
+          <a
+            href={waLink('Hola, tengo una pregunta que no figura en las preguntas frecuentes.')}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-whatsapp mt-5 w-full"
+          >
+            Preguntar por WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Acordeón -->
+      <div class="lg:col-span-7">
+        <div class="divide-y divide-grafito-200/70 border-y border-grafito-200/70" data-reveal-stagger>
+          {
+            faqs.map((faq, i) => (
+              <details class="faq-item group" open={i === 0} data-reveal>
+                <summary class="flex items-start justify-between gap-6 py-6 transition-colors hover:text-terracota-700">
+                  <h3 class="font-serif text-fluid-lg font-medium text-grafito-900 group-hover:text-terracota-700">
+                    {faq.q}
+                  </h3>
+                  <span
+                    class="faq-sign relative mt-1.5 grid h-6 w-6 shrink-0 place-items-center text-terracota-600"
+                    aria-hidden="true"
+                  >
+                    <span class="absolute h-0.5 w-3.5 rounded-full bg-current" />
+                    <span class="absolute h-3.5 w-0.5 rounded-full bg-current" />
+                  </span>
+                </summary>
+                <div>
+                  <p class="max-w-2xl pb-7 leading-relaxed text-grafito-600">{faq.a}</p>
+                </div>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Datos estructurados FAQ (JSON-LD) -->
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+</section>

@@ -1,0 +1,130 @@
+---
+import { site, telLink, fullAddress } from '../data/site';
+
+const year = new Date().getFullYear();
+
+const socials = [
+  {
+    href: site.social.instagram,
+    label: 'Instagram',
+    path: 'M12 2.2c3.2 0 3.6 0 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58 0-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 01-1.38-.9 3.7 3.7 0 01-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.21 15.58 2.2 15.2 2.2 12s0-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.21 8.8 2.2 12 2.2zm0 3.27A6.53 6.53 0 1018.53 12 6.53 6.53 0 0012 5.47zm0 10.77A4.24 4.24 0 1116.24 12 4.24 4.24 0 0112 16.24zm6.79-10.99a1.53 1.53 0 11-1.53-1.52 1.53 1.53 0 011.53 1.52z',
+  },
+  {
+    href: site.social.linkedin,
+    label: 'LinkedIn',
+    path: 'M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05a3.75 3.75 0 013.38-1.86c3.61 0 4.28 2.38 4.28 5.47v6.28zM5.34 7.43a2.07 2.07 0 112.06-2.07 2.07 2.07 0 01-2.06 2.07zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77A1.75 1.75 0 000 1.73v20.54A1.75 1.75 0 001.77 24h20.45A1.76 1.76 0 0024 22.27V1.73A1.76 1.76 0 0022.22 0z',
+  },
+  {
+    href: site.social.facebook,
+    label: 'Facebook',
+    path: 'M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6.02 4.39 11.01 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.08 24 18.09 24 12.07z',
+  },
+].filter((s) => s.href);
+---
+
+<footer class="relative overflow-hidden bg-grafito-950 text-arena-200">
+  <div class="container-editorial py-16 sm:py-20">
+    <div class="grid gap-12 md:grid-cols-12" data-reveal-stagger>
+      <!-- Marca -->
+      <div class="md:col-span-5" data-reveal>
+        <div class="flex items-center gap-3">
+          <img src="/logo.png" alt="" width="500" height="500" class="h-11 w-11 object-contain" />
+          <span class="font-serif text-xl text-arena-50">{site.name}</span>
+        </div>
+        <p class="mt-6 max-w-sm text-fluid-base leading-relaxed text-arena-300">
+          Asesoría contable e impositiva con base en San Carlos de Bariloche. Claridad, cercanía y
+          números en orden para empresas y personas.
+        </p>
+
+        {
+          socials.length > 0 && (
+            <div class="mt-7 flex items-center gap-3">
+              {socials.map((s) => (
+                <a
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  class="grid h-10 w-10 place-items-center rounded-full border border-arena-50/15 text-arena-200 transition-all duration-300 hover:-translate-y-0.5 hover:border-terracota-500 hover:bg-terracota-600 hover:text-arena-50"
+                >
+                  <svg viewBox="0 0 24 24" class="h-[18px] w-[18px]" fill="currentColor" aria-hidden="true">
+                    <path d={s.path} />
+                  </svg>
+                </a>
+              ))}
+            </div>
+          )
+        }
+      </div>
+
+      <!-- Navegación -->
+      <nav class="md:col-span-3" aria-label="Navegación del pie" data-reveal>
+        <h2 class="text-xs font-semibold uppercase tracking-eyebrow text-arena-400">Secciones</h2>
+        <ul class="mt-5 space-y-3">
+          {
+            site.nav.map((item) => (
+              <li>
+                <a href={item.href} class="link-underline text-arena-200 transition-colors hover:text-arena-50">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <!-- Contacto / NAP -->
+      <div class="md:col-span-4" data-reveal>
+        <h2 class="text-xs font-semibold uppercase tracking-eyebrow text-arena-400">Contacto</h2>
+        <ul class="mt-5 space-y-4 text-arena-200">
+          <li class="flex items-start gap-3">
+            <svg viewBox="0 0 24 24" class="mt-0.5 h-5 w-5 shrink-0 text-terracota-400" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M12 21s-7-5.2-7-11a7 7 0 1114 0c0 5.8-7 11-7 11z" />
+              <circle cx="12" cy="10" r="2.5" />
+            </svg>
+            <address class="not-italic leading-relaxed">{fullAddress()}</address>
+          </li>
+          <li class="flex items-center gap-3">
+            <svg viewBox="0 0 24 24" class="h-5 w-5 shrink-0 text-terracota-400" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M4 5c0 9 6 15 15 15a2 2 0 002-2v-2.5a1 1 0 00-.8-1l-3.3-.7a1 1 0 00-1 .4l-.9 1.2a12 12 0 01-5.4-5.4l1.2-.9a1 1 0 00.4-1L10.2 4.8A1 1 0 009.2 4H6.5A2 2 0 004.5 6" />
+            </svg>
+            <a href={telLink()} class="link-underline transition-colors hover:text-arena-50">{site.contact.phoneDisplay}</a>
+          </li>
+          <li class="flex items-center gap-3">
+            <svg viewBox="0 0 24 24" class="h-5 w-5 shrink-0 text-terracota-400" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <path d="M3.5 6.5l8.5 6 8.5-6" />
+            </svg>
+            <a href={`mailto:${site.contact.email}`} data-copy-email title="Copiar correo" class="link-underline transition-colors hover:text-arena-50">{site.contact.email}</a>
+          </li>
+          <li class="flex items-center gap-3">
+            <svg viewBox="0 0 24 24" class="h-5 w-5 shrink-0 text-terracota-400" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 7v5l3.5 2" />
+            </svg>
+            <span>{site.hoursDisplay}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Barra inferior -->
+    <div class="mt-14 flex flex-col gap-4 border-t border-arena-50/10 pt-7 text-sm text-arena-400 sm:flex-row sm:items-center sm:justify-between">
+      <p>© <span id="footer-year">{year}</span> {site.name}. {site.owner.matricula}.</p>
+      <a href="#inicio" class="link-underline inline-flex items-center gap-2 transition-colors hover:text-arena-50">
+        Volver arriba
+        <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <path d="M12 19V5M6 11l6-6 6 6" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // El año se calcula al compilar; este ajuste lo mantiene siempre al día en el
+  // navegador, aunque el sitio no se vuelva a compilar al cambiar de año.
+  const el = document.getElementById('footer-year');
+  const current = String(new Date().getFullYear());
+  if (el && el.textContent !== current) el.textContent = current;
+</script>

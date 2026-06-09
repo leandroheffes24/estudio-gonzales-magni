@@ -1,0 +1,33 @@
+---
+interface Props {
+  href: string;
+  variant?: 'primary' | 'ghost' | 'on-dark' | 'whatsapp';
+  external?: boolean;
+  arrow?: boolean;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const {
+  href,
+  variant = 'primary',
+  external = false,
+  arrow = false,
+  class: extra = '',
+  ...rest
+} = Astro.props;
+
+const variants: Record<string, string> = {
+  primary: 'btn-primary',
+  ghost: 'btn-ghost',
+  'on-dark': 'btn-on-dark',
+  whatsapp: 'btn-whatsapp',
+};
+
+const externalAttrs = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+---
+
+<a href={href} class:list={['btn', variants[variant], extra]} {...externalAttrs} {...rest}>
+  <slot />
+  {arrow && <span class="btn-arrow" aria-hidden="true">→</span>}
+</a>

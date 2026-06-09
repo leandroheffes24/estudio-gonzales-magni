@@ -1,0 +1,51 @@
+---
+const reasons = [
+  {
+    title: 'Especialización puntual',
+    text: 'No hacemos de todo un poco. Nos enfocamos en lo que dominamos, y eso se nota en la precisión de cada respuesta.',
+  },
+  {
+    title: 'Conocimiento local',
+    text: 'Conocemos Bariloche y Río Negro: la Agencia de Recaudación provincial, los tiempos de la zona y la realidad de cada actividad.',
+  },
+  {
+    title: 'Lenguaje accesible',
+    text: 'Te explicamos en palabras que se entienden. Y si algo no quedó claro, lo volvemos a explicar las veces que haga falta.',
+  },
+  {
+    title: 'Atención personalizada',
+    text: 'No sos un número de expediente. Hablás siempre con la misma persona, la que conoce tu caso de memoria.',
+  },
+];
+---
+
+<section id="por-que" class="scroll-mt-24 py-section">
+  <div class="container-editorial">
+    <div class="flex items-center gap-4" data-reveal>
+      <span class="section-index">04</span>
+      <span class="eyebrow">Por qué elegirnos</span>
+    </div>
+
+    <!-- Declaración imponente -->
+    <h2 class="mt-7 max-w-4xl font-serif text-fluid-3xl font-medium leading-[1.08] text-grafito-950" data-reveal>
+      Elegir contador es, en el fondo, elegir <em class="text-terracota-700">tranquilidad</em>. Por eso
+      cuidamos cada detalle de cómo trabajamos.
+    </h2>
+
+    <div class="mt-16 grid gap-x-12 gap-y-12 md:grid-cols-2 lg:gap-x-20" data-reveal-stagger>
+      {
+        reasons.map((reason, i) => (
+          <div class="group flex gap-6" data-reveal>
+            <span class="font-serif text-5xl font-light leading-none text-arena-300 transition-colors duration-500 ease-out-expo group-hover:text-terracota-500 sm:text-6xl">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <div class="border-t-2 border-grafito-950 pt-4">
+              <h3 class="font-serif text-fluid-xl font-medium text-grafito-950">{reason.title}</h3>
+              <p class="mt-3 max-w-md leading-relaxed text-grafito-600">{reason.text}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

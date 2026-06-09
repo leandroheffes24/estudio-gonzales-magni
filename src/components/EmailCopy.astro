@@ -1,0 +1,80 @@
+---
+// Copia el correo al portapapeles (en vez de abrir el cliente de mail) y muestra
+// un aviso. Funciona con cualquier enlace marcado con data-copy-email.
+// Fallback: si el portapapeles no está disponible, abre el mailto normal.
+---
+
+<div
+  id="copy-toast"
+  role="status"
+  aria-live="polite"
+  class="copy-toast pointer-events-none fixed inset-x-0 bottom-6 z-[60] mx-auto flex w-fit max-w-[90vw] items-center gap-2.5 rounded-full bg-grafito-950 px-5 py-3 text-sm font-medium text-arena-50 shadow-lift"
+>
+  <svg viewBox="0 0 24 24" class="h-4 w-4 text-pino-300" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+    <path d="M5 12l4 4L19 6" />
+  </svg>
+  <span id="copy-toast-text">¡Correo copiado!</span>
+</div>
+
+<style>
+  .copy-toast {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .copy-toast.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+</style>
+
+<script>
+  const toast = document.getElementById('copy-toast');
+  const toastText = document.getElementById('copy-toast-text');
+  let hideTimer: ReturnType<typeof setTimeout>;
+
+  function showToast(msg: string) {
+    if (!toast || !toastText) return;
+    toastText.textContent = msg;
+    toast.classList.add('is-visible');
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => toast.classList.remove('is-visible'), 2200);
+  }
+
+  async function copyText(text: string): Promise<boolean> {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+    } catch (_) {}
+    // Fallback para contextos no seguros / navegadores viejos
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.top = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      const ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      return ok;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (!target || !target.closest) return;
+    const a = target.closest('a[data-copy-email]') as HTMLAnchorElement | null;
+    if (!a) return;
+    e.preventDefault();
+    const email = (a.getAttribute('href') || '').replace(/^mailto:/i, '') || (a.textContent || '').trim();
+    copyText(email).then((ok) => {
+      if (ok) showToast('¡Correo copiado!');
+      else window.location.href = 'mailto:' + email; // fallback
+    });
+  });
+</script>

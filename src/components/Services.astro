@@ -1,0 +1,77 @@
+---
+import { services, waLink } from '../data/site';
+---
+
+<section id="servicios" class="scroll-mt-24 bg-arena-100/40 py-section">
+  <div class="container-editorial">
+    <div class="grid gap-12 lg:grid-cols-12 lg:gap-16">
+      <!-- Columna intro (sticky en escritorio) -->
+      <div class="lg:col-span-4" data-reveal>
+        <div class="lg:sticky lg:top-28">
+          <div class="flex items-center gap-4">
+            <span class="section-index">02</span>
+            <span class="eyebrow">Servicios</span>
+          </div>
+          <h2 class="mt-5 font-serif text-fluid-3xl font-medium text-grafito-950">
+            Lo que resolvemos, dicho en simple
+          </h2>
+          <p class="mt-6 max-w-md text-fluid-lg leading-relaxed text-grafito-600">
+            Trabajamos cada tema con criterio y al día. Sin paquetes inflados: sólo lo que
+            realmente necesitás para estar tranquilo.
+          </p>
+          <a href="#contacto" class="btn btn-ghost mt-8">
+            Quiero asesorarme
+            <span class="btn-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Lista editorial de servicios -->
+      <div class="lg:col-span-8">
+        <ul class="border-b hairline" data-reveal-stagger>
+          {
+            services.map((service, i) => (
+              <li class="group relative border-t hairline" data-reveal>
+                <div class="relative grid grid-cols-[auto_1fr] gap-x-5 py-8 pl-5 transition-colors duration-500 sm:gap-x-8 sm:py-9">
+                  {/* Barra de acento que crece al hover */}
+                  <span
+                    aria-hidden="true"
+                    class="absolute left-0 top-9 h-0 w-0.5 bg-terracota-500 transition-all duration-500 ease-out-expo group-hover:h-12"
+                  />
+                  <span class="font-serif text-xl text-grafito-300 transition-colors duration-500 group-hover:text-terracota-600 sm:text-2xl">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <div>
+                    <div class="flex items-start justify-between gap-4">
+                      <h3 class="font-serif text-fluid-xl font-medium text-grafito-950 transition-transform duration-500 ease-out-expo group-hover:translate-x-1">
+                        {service.title}
+                      </h3>
+                      <span
+                        class="mt-1 shrink-0 text-grafito-300 transition-all duration-500 ease-out-expo group-hover:translate-x-1 group-hover:text-terracota-600"
+                        aria-hidden="true"
+                      >
+                        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6">
+                          <path d="M7 17L17 7M9 7h8v8" />
+                        </svg>
+                      </span>
+                    </div>
+                    <p class="mt-2 max-w-2xl font-medium text-grafito-700">{service.summary}</p>
+                    <p class="mt-3 max-w-2xl leading-relaxed text-grafito-500">{service.detail}</p>
+                  </div>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+
+        <p class="mt-8 text-grafito-600">
+          ¿Tu caso no figura en la lista?{' '}
+          <a href={waLink('Hola, tenía una consulta puntual que no figura en la web.')} target="_blank" rel="noopener noreferrer" class="link-underline font-medium text-terracota-700">
+            Escribinos igual
+          </a>{' '}
+          y lo vemos.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

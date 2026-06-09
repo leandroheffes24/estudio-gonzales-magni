@@ -1,0 +1,187 @@
+---
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/hanken-grotesk';
+import '../styles/global.css';
+
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+import WhatsAppChooser from '../components/WhatsAppChooser.astro';
+import EmailCopy from '../components/EmailCopy.astro';
+
+import { site, fullAddress, mapLink } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = `${site.name} — ${site.tagline}`,
+  description = site.description,
+  image = '/og-image.jpg',
+  noindex = false,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL(image, Astro.site).href;
+
+// ── Datos estructurados: negocio local (AccountingService ⊂ LocalBusiness) ──
+const businessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'AccountingService',
+  '@id': `${site.url}/#estudio`,
+  name: site.name,
+  legalName: site.legalName,
+  description: site.description,
+  url: site.url,
+  image: ogImage,
+  logo: new URL('/logo.png', Astro.site).href,
+  telephone: site.contact.phoneE164,
+  email: site.contact.email,
+  priceRange: '$$',
+  currenciesAccepted: 'ARS',
+  paymentAccepted: 'Efectivo, Transferencia bancaria',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.address.street,
+    addressLocality: site.address.city,
+    addressRegion: site.address.region,
+    postalCode: site.address.postalCode,
+    addressCountry: site.address.country,
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: site.address.geo.lat,
+    longitude: site.address.geo.lng,
+  },
+  hasMap: mapLink(),
+  openingHoursSpecification: site.openingHours.map((h) => ({
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: h.days,
+    opens: h.opens,
+    closes: h.closes,
+  })),
+  areaServed: site.areaServed.map((name) => ({
+    '@type': name === 'Río Negro' ? 'AdministrativeArea' : 'City',
+    name,
+  })),
+  founder: {
+    '@type': 'Person',
+    name: site.owner.name,
+    jobTitle: 'Contadora Pública',
+  },
+  knowsLanguage: ['es-AR'],
+  sameAs: [site.social.instagram, site.social.linkedin, site.social.facebook].filter(Boolean),
+};
+---
+
+<!doctype html>
+<html lang={site.lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Canónica e indexación -->
+    <link rel="canonical" href={canonicalURL} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- SEO base -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={site.name} />
+    <meta name="theme-color" content="#faf7f1" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- SEO local -->
+    <meta name="geo.region" content="AR-R" />
+    <meta name="geo.placename" content={site.address.city} />
+    <meta name="geo.position" content={`${site.address.geo.lat};${site.address.geo.lng}`} />
+    <meta name="ICBM" content={`${site.address.geo.lat}, ${site.address.geo.lng}`} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={site.locale} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${site.name} · ${site.tagline}`} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Iconos -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Datos estructurados: LocalBusiness / AccountingService -->
+    <script type="application/ld+json" set:html={JSON.stringify(businessSchema)} />
+
+    <!-- Revelado de secciones al hacer scroll (mejora progresiva, multi-navegador) -->
+    <script is:inline>
+      (function () {
+        var d = document;
+        if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        d.documentElement.classList.add('reveal-ready');
+        function init() {
+          d.querySelectorAll('[data-reveal-stagger]').forEach(function (group) {
+            group.querySelectorAll('[data-reveal]').forEach(function (el, i) {
+              el.style.setProperty('--reveal-delay', (i * 0.08).toFixed(2) + 's');
+            });
+          });
+          var io = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (e) {
+                if (e.isIntersecting) {
+                  e.target.classList.add('is-visible');
+                  io.unobserve(e.target);
+                }
+              });
+            },
+            { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+          );
+          d.querySelectorAll('[data-reveal]').forEach(function (el) {
+            io.observe(el);
+          });
+        }
+        if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', init);
+        else init();
+      })();
+    </script>
+  </head>
+
+  <body>
+    <!-- Accesibilidad: salto al contenido -->
+    <a
+      href="#contenido"
+      class="sr-only z-[100] rounded-full bg-grafito-950 px-5 py-3 text-arena-50 focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+    >
+      Saltar al contenido
+    </a>
+
+    <!-- Textura sutil de tiza/grano (decorativa) -->
+    <div aria-hidden="true" class="pointer-events-none fixed inset-0 z-[1] bg-grain opacity-[0.035] mix-blend-multiply"></div>
+
+    <Header />
+
+    <main id="contenido">
+      <slot />
+    </main>
+
+    <Footer />
+    <WhatsAppFloat />
+    <WhatsAppChooser />
+    <EmailCopy />
+  </body>
+</html>

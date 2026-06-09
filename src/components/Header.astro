@@ -1,0 +1,111 @@
+---
+import { site, waLink } from '../data/site';
+---
+
+<header class="sticky top-0 z-50 border-b border-grafito-900/10 bg-arena-50/80 backdrop-blur-md">
+  <!-- Toggle del menú móvil (peer): funciona sin JavaScript -->
+  <input id="nav-toggle" type="checkbox" class="peer sr-only" aria-hidden="true" />
+
+  <div class="container-editorial flex h-[var(--header-h)] items-center justify-between gap-6">
+    <!-- Marca -->
+    <a href="#inicio" class="group flex items-center gap-3" aria-label={`${site.name} — inicio`}>
+      <img src="/logo.png" alt="" width="500" height="500" class="h-10 w-10 shrink-0 object-contain" />
+      <span class="flex flex-col leading-none">
+        <span class="font-serif text-lg font-medium text-grafito-950">{site.shortName}</span>
+        <span class="mt-0.5 text-[0.62rem] font-medium uppercase tracking-eyebrow text-grafito-400">
+          Estudio contable
+        </span>
+      </span>
+    </a>
+
+    <!-- Navegación de escritorio -->
+    <nav class="hidden items-center gap-9 lg:flex" aria-label="Navegación principal">
+      {
+        site.nav.map((item) => (
+          <a
+            href={item.href}
+            class="link-underline text-sm font-medium text-grafito-600 transition-colors hover:text-grafito-950"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- Acciones -->
+    <div class="flex items-center gap-3">
+      <a
+        href="#contacto"
+        class="btn btn-primary hidden !px-5 !py-2.5 !text-xs sm:inline-flex"
+      >
+        Agendá tu consulta
+      </a>
+
+      <!-- Hamburguesa (móvil) -->
+      <label
+        for="nav-toggle"
+        class="grid h-11 w-11 cursor-pointer place-items-center rounded-full border border-grafito-200 text-grafito-900 transition-colors hover:bg-grafito-900 hover:text-arena-50 lg:hidden"
+        aria-label="Abrir menú de navegación"
+        aria-controls="mobile-nav"
+        aria-expanded="false"
+        role="button"
+        tabindex="0"
+      >
+        <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <line x1="3" y1="7" x2="21" y2="7" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="17" x2="21" y2="17" />
+        </svg>
+      </label>
+    </div>
+  </div>
+
+  <!-- Panel móvil (se muestra con el peer :checked) -->
+  <div
+    id="mobile-nav"
+    class="absolute inset-x-0 top-full hidden origin-top border-b border-grafito-900/10 bg-arena-50 shadow-soft peer-checked:block lg:!hidden"
+  >
+    <nav class="container-editorial flex flex-col py-3" aria-label="Navegación móvil">
+      {
+        site.nav.map((item) => (
+          <a
+            href={item.href}
+            class="border-b border-grafito-200/60 py-3.5 font-serif text-lg text-grafito-800 transition-colors hover:text-terracota-700"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <div class="flex flex-col gap-3 py-5 sm:flex-row">
+        <a href="#contacto" class="btn btn-primary flex-1">Agendá tu consulta</a>
+        <a href={waLink()} target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp flex-1">
+          WhatsApp
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Mejora progresiva: el menú ya funciona con CSS; esto sólo pule la UX.
+  const cb = document.getElementById('nav-toggle') as HTMLInputElement | null;
+  const label = document.querySelector('label[for="nav-toggle"]');
+  const panel = document.getElementById('mobile-nav');
+
+  if (cb && label) {
+    const sync = () => label.setAttribute('aria-expanded', String(cb.checked));
+    cb.addEventListener('change', sync);
+    panel?.querySelectorAll('a').forEach((a) =>
+      a.addEventListener('click', () => {
+        cb.checked = false;
+        sync();
+      })
+    );
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && cb.checked) {
+        cb.checked = false;
+        sync();
+      }
+    });
+  }
+</script>

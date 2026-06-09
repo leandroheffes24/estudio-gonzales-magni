@@ -1,0 +1,85 @@
+---
+import { site } from '../data/site';
+
+const years = new Date().getFullYear() - site.foundingYear;
+
+const facts = [
+  { label: 'Matriculación', value: 'C.P.C.E. Río Negro' },
+  { label: 'Cobertura', value: 'Bariloche y la región andina' },
+  { label: 'Modalidad', value: 'Atención online y presencial' },
+  { label: 'Especialidad', value: 'Impuestos · Sueldos · Balances' },
+];
+---
+
+<section id="nosotros" class="scroll-mt-24 bg-arena-100/40 py-section">
+  <div class="container-editorial">
+    <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+      <!-- Ficha del estudio (reemplaza la foto) -->
+      <div class="lg:col-span-5" data-reveal>
+        <div class="relative mx-auto max-w-md lg:mx-0">
+          <div aria-hidden="true" class="absolute -right-5 -top-5 h-24 w-24 rounded-3xl bg-terracota-100/70"></div>
+          <div aria-hidden="true" class="absolute -bottom-6 -left-6 h-28 w-28 rounded-3xl border border-grafito-300/50"></div>
+
+          <div class="relative rounded-[2rem] border border-grafito-200/70 bg-arena-50 p-8 shadow-soft sm:p-9">
+            <p class="eyebrow">El estudio en datos</p>
+
+            <p class="mt-6 font-serif text-4xl leading-none text-grafito-950">
+              {years}+
+              <span class="ml-1 align-baseline font-sans text-base font-normal text-grafito-500">años en Bariloche</span>
+            </p>
+
+            <dl class="mt-8 divide-y divide-grafito-200/70">
+              {
+                facts.map((f) => (
+                  <div class="py-4 first:pt-0 last:pb-0">
+                    <dt class="text-xs font-semibold uppercase tracking-eyebrow text-grafito-400">{f.label}</dt>
+                    <dd class="mt-1 font-serif text-lg text-grafito-950">{f.value}</dd>
+                  </div>
+                ))
+              }
+            </dl>
+          </div>
+        </div>
+      </div>
+
+      <!-- Texto (en voz del estudio) -->
+      <div class="lg:col-span-7 lg:pl-6" data-reveal>
+        <div class="flex items-center gap-4">
+          <span class="section-index">05</span>
+          <span class="eyebrow">Nosotros</span>
+        </div>
+
+        <h2 class="mt-5 max-w-xl font-serif text-fluid-3xl font-medium text-grafito-950">
+          Un estudio cercano, con criterio y experiencia
+        </h2>
+
+        <div class="mt-7 max-w-xl space-y-5 text-fluid-base leading-relaxed text-grafito-600">
+          <p>
+            El <strong class="font-semibold text-grafito-800">{site.name}</strong> trabaja desde San
+            Carlos de Bariloche con una idea simple: que llevar las cuentas en orden deje de ser un
+            dolor de cabeza. Acompañamos a comerciantes, profesionales, pymes y familias de toda la
+            región andina de Río Negro.
+          </p>
+          <p>
+            Combinamos rigor técnico con un trato claro: preferimos que entiendas por qué firmás,
+            antes de que firmes y listo. Cada consulta se resuelve con la misma prolijidad, sea una
+            recategorización de monotributo o el cierre de balance de una sociedad.
+          </p>
+        </div>
+
+        <!-- Declaración del estudio (impersonal) -->
+        <blockquote class="mt-8 max-w-xl border-l-2 border-terracota-500 pl-6">
+          <p class="font-serif text-fluid-lg italic text-grafito-800">
+            “Que los números cierren no alcanza: trabajamos para que te quedes tranquilo.”
+          </p>
+        </blockquote>
+
+        <!-- Cierre institucional (sin firma personal) -->
+        <div class="mt-8 border-t hairline pt-6">
+          <p class="font-serif text-xl text-grafito-950">{site.name}</p>
+          <p class="mt-1 text-sm text-grafito-500">{site.owner.matricula} · {site.address.city}, {site.address.region}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

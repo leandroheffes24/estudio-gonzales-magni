@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Gonzáles Magni">
+  <rect width="64" height="64" rx="14" fill="#1f1c19"/>
+  <path d="M11 49 L23 15 H29 L41 49 H34.5 L32 41 H20 L17.5 49 Z M21.7 35.5 H30.3 L26 22.5 Z" fill="#faf7f1"/>
+  <path d="M40 49 V20 H45.5 L52 36 V20 H57 V49 H51.7 L45 32 V49 Z" fill="#faf7f1"/>
+  <rect x="11" y="53" width="46" height="3" rx="1.5" fill="#c75f37"/>
+</svg>

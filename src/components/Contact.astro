@@ -65,7 +65,11 @@ const fieldClass =
         <div class="rounded-[2rem] border border-grafito-200/70 bg-arena-50 p-6 shadow-soft sm:p-9">
           <form id="contact-form" action={site.contact.formEndpoint} method="POST" class="space-y-5" novalidate>
             <!-- Honeypot anti-spam (oculto) -->
-            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+            <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+            <!-- Configuración de FormSubmit -->
+            <input type="hidden" name="_subject" value="Nueva consulta desde la web" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
 
             <div class="grid gap-5 sm:grid-cols-2">
               <label class="block">
@@ -149,7 +153,7 @@ const fieldClass =
       const data = new FormData(form);
 
       // Honeypot: si está completo, es un bot → ignorar en silencio
-      if (data.get('_gotcha')) {
+      if (data.get('_honey')) {
         e.preventDefault();
         return;
       }

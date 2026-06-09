@@ -31,7 +31,7 @@ const ogImage = new URL(image, Astro.site).href;
 // ── Datos estructurados: negocio local (AccountingService ⊂ LocalBusiness) ──
 const businessSchema = {
   '@context': 'https://schema.org',
-  '@type': 'AccountingService',
+  '@type': ['AccountingService', 'LegalService'],
   '@id': `${site.url}/#estudio`,
   name: site.name,
   legalName: site.legalName,

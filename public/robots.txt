@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # Sitemap generado automáticamente por @astrojs/sitemap
-Sitemap: https://www.gonzalesmagni.com.ar/sitemap-index.xml
+Sitemap: https://www.estudiogmagni.com.ar/sitemap-index.xml

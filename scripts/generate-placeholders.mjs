@@ -59,9 +59,10 @@ function ogSVG(w, h) {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
     <rect width="${w}" height="${h}" fill="${C.grafito950}"/>
     <circle cx="${w * 0.86}" cy="${h * 0.2}" r="${h * 0.5}" fill="${C.terracota500}" opacity="0.18"/>
-    <rect x="90" y="${h * 0.34}" width="64" height="6" rx="3" fill="${C.terracota500}"/>
-    <text x="90" y="${h * 0.5}" font-family="Georgia, serif" font-size="74" fill="${C.arena50}">Estudio Gonzáles Magni</text>
-    <text x="92" y="${h * 0.63}" font-family="Arial, Helvetica, sans-serif" font-size="34" fill="${C.arena300}">Asesoría contable en Bariloche · Río Negro</text>
+    <rect x="90" y="${h * 0.28}" width="64" height="6" rx="3" fill="${C.terracota500}"/>
+    <text x="88" y="${h * 0.43}" font-family="Georgia, serif" font-size="60" fill="${C.arena50}">Estudio Contable y Jurídico</text>
+    <text x="88" y="${h * 0.55}" font-family="Georgia, serif" font-size="60" fill="${C.arena50}">González Magni</text>
+    <text x="92" y="${h * 0.7}" font-family="Arial, Helvetica, sans-serif" font-size="32" fill="${C.arena300}">Asesoría contable y jurídica en Bariloche · Río Negro</text>
     <text x="92" y="${h * 0.86}" font-family="Arial, Helvetica, sans-serif" font-size="26" fill="${C.grafito400}" letter-spacing="2">Empresas · Pymes · Monotributo · Personas</text>
   </svg>`;
 }
@@ -81,14 +82,14 @@ async function render(svg, w, h, outPath, fallback) {
 
 const tasks = [
   {
-    svg: portraitSVG(1080, 1350, 'ESTUDIO GONZÁLES MAGNI'),
+    svg: portraitSVG(1080, 1350, 'ESTUDIO GONZÁLEZ MAGNI'),
     w: 1080,
     h: 1350,
     out: path.join(assetsDir, 'hero-portrait.jpg'),
     fb: { r: 234, g: 225, b: 208 },
   },
   {
-    svg: portraitSVG(960, 1200, 'GONZÁLES MAGNI'),
+    svg: portraitSVG(960, 1200, 'GONZÁLEZ MAGNI'),
     w: 960,
     h: 1200,
     out: path.join(assetsDir, 'about-portrait.jpg'),

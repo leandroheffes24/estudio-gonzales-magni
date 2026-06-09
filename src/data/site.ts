@@ -1,6 +1,6 @@
 /*
  * ============================================================================
- *  CONFIGURACIÓN CENTRAL DEL SITIO — Estudio Gonzáles Magni
+ *  CONFIGURACIÓN CENTRAL DEL SITIO — Estudio Contable y Jurídico González Magni
  * ----------------------------------------------------------------------------
  *  ⚠️  DATOS DE EJEMPLO. Reemplazá los valores marcados con « EDITAR » por la
  *      información real del estudio. Todo el sitio (textos, botones, JSON-LD
@@ -10,21 +10,21 @@
 
 export const site = {
   // ── Identidad ────────────────────────────────────────────────────────────
-  name: 'Estudio Gonzáles Magni',
-  legalName: 'Estudio Contable Gonzáles Magni',
-  shortName: 'Gonzáles Magni',
-  tagline: 'Asesoría contable en San Carlos de Bariloche',
+  name: 'Estudio Contable y Jurídico González Magni',
+  legalName: 'Estudio Contable y Jurídico González Magni',
+  shortName: 'González Magni',
+  tagline: 'Asesoría contable y jurídica en San Carlos de Bariloche',
   url: 'https://www.estudiogmagni.com.ar',
   lang: 'es-AR',
   locale: 'es_AR',
   foundingYear: 2011, // EDITAR
 
   description:
-    'Estudio contable en San Carlos de Bariloche, Río Negro. Asesoría impositiva y contable para empresas, pymes, monotributistas y profesionales, con atención personalizada y lenguaje claro.',
+    'Estudio contable y jurídico en San Carlos de Bariloche, Río Negro. Asesoría impositiva, contable y jurídica para empresas, pymes, monotributistas y profesionales, con atención personalizada y lenguaje claro.',
 
   // ── Titular ──────────────────────────────────────────────────────────────
   owner: {
-    name: 'María Emilia Gonzáles Magni', // EDITAR (nombre de la titular)
+    name: 'María Emilia González Magni', // EDITAR (nombre de la titular)
     role: 'Contadora Pública · Titular del estudio',
     matricula: 'Matrícula C.P.C.E. Río Negro', // EDITAR (Nº de matrícula)
   },
@@ -37,10 +37,13 @@ export const site = {
     whatsappMessage:
       'Hola, llegué desde la web del estudio y quería hacer una consulta.',
     email: 'estudiogmagni@gmail.com',
-    // Endpoint del formulario. Recomendado: crear un form gratuito en
-    // https://formspree.io y pegar acá la URL (ej. https://formspree.io/f/abc123).
-    // Si lo dejás como está, el formulario deriva la consulta a WhatsApp.
-    formEndpoint: 'https://formspree.io/f/your-form-id', // EDITAR
+    // Endpoint del formulario — FormSubmit.co (gratis, sin cuenta, va directo a tu Gmail).
+    // ⚠️ ACTIVACIÓN: la primera vez que llegue una consulta, FormSubmit te manda un
+    //    mail para "Activar" el formulario. Hacé clic en ese enlace UNA sola vez.
+    // 🔒 Recomendado: reemplazar el mail por el alias con hash que te da FormSubmit
+    //    (ej. https://formsubmit.co/ajax/abc123) para no exponer la dirección en el HTML.
+    // Si lo dejás vacío o como el placeholder, el formulario deriva la consulta a WhatsApp.
+    formEndpoint: 'https://formsubmit.co/ajax/estudiogmagni@gmail.com',
   },
 
   // ── Líneas de WhatsApp por área ──────────────────────────────────────────
@@ -134,6 +137,13 @@ export const services = [
     detail:
       'Preparamos tus estados contables con criterio profesional y los dejamos listos para bancos, organismos o socios, acompañándote en la lectura de los números de tu negocio.',
   },
+  {
+    title: 'Asesoramiento jurídico',
+    summary:
+      'Sociedades, contratos y derecho laboral, integrados con la mirada contable e impositiva.',
+    detail:
+      'Constitución y reorganización de sociedades, estatutos y actas, contratos comerciales y laborales, y acompañamiento en conflictos. Coordinamos lo legal con tu situación impositiva para que ambas cosas vayan en la misma dirección.',
+  },
 ] as const;
 
 /* ── Preguntas frecuentes (alimentan el acordeón Y el Schema FAQ) ─────────── */
@@ -168,7 +178,7 @@ export const faqs = [
   },
   {
     q: '¿Atienden empresas y pymes además de personas?',
-    a: 'Sí. Trabajamos tanto con personas (monotributo, Ganancias, Bienes Personales) como con pymes y sociedades en su gestión impositiva, laboral y contable integral, incluidos cierres de ejercicio y balances.',
+    a: 'Sí. Trabajamos tanto con personas (monotributo, Ganancias, Bienes Personales) como con pymes y sociedades en su gestión impositiva, laboral, contable y jurídica integral, incluidos cierres de ejercicio y balances.',
   },
 ] as const;
 

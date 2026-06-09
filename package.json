@@ -2,7 +2,7 @@
   "name": "estudio-gonzales-magni",
   "type": "module",
   "version": "1.0.0",
-  "description": "Sitio institucional one-page del Estudio Gonzáles Magni — asesoría contable en San Carlos de Bariloche, Río Negro.",
+  "description": "Sitio institucional one-page del Estudio Contable y Jurídico González Magni — asesoría contable y jurídica en San Carlos de Bariloche, Río Negro.",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",

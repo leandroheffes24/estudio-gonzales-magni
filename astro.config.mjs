@@ -4,7 +4,7 @@ import sitemap from '@astrojs/sitemap';
 
 // ⚠️ CONFIGURACIÓN: reemplazá este dominio por el real cuando publiques el sitio.
 // Se usa para generar URLs canónicas, Open Graph y el sitemap.xml.
-const SITE_URL = 'https://www.gonzalesmagni.com.ar';
+const SITE_URL = 'https://www.estudiogmagni.com.ar';
 
 // https://astro.build/config
 export default defineConfig({

@@ -2,7 +2,7 @@
 
 /*
  * ============================================================================
- *  SISTEMA DE DISEÑO — Estudio Gonzáles Magni
+ *  SISTEMA DE DISEÑO — Estudio Contable y Jurídico González Magni
  * ----------------------------------------------------------------------------
  *  Paleta de autor inspirada en Bariloche: la seriedad de un estudio formal
  *  con la calidez de la cordillera. Nada de azul eléctrico corporativo.
